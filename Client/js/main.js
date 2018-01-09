@@ -1,21 +1,32 @@
-let game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, "", {
-    preload: preload,
-    create: create
-});
+//socket = io();
 
-socket = io();
 let graphics;
 let players = [];
 let mouseLocation = {};
 
+State.Main = function(game){
+
+};
+
+State.Main.prototype = {
+    preload: function(){
+    },
+    create: function(){
+        this.stage.backgroundColor = '#0072bc';
+    }
+};
+
 function preload(){
-    game.stage.backgroundColor = '#0072bc';
-    game.load.image('priest', '../Media/priest.png');
-    game.load.image('mage', '../Media/mage.png');
+
+
 }
 
 
 function create(){
-    socket.emit('ready');
+    socket = io();
+}
+
+function listener(){
+
 }
 

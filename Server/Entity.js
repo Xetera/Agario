@@ -30,6 +30,7 @@ Entity.prototype.update = function(){
 };
 
 Entity.prototype.move = function(mouse){
+    console.log(mouse);
     let playerLocation = new Victor(this.x, this.y);
     let mouseLocation = new Victor(mouse.x, mouse.y);
     let delta  = mouseLocation.subtract(playerLocation);

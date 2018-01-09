@@ -9,6 +9,7 @@ handler.playerConnect = function(pack){
 };
 
 handler.playerUpdate = function(pack){
+    getMouseLocation();
     handler.emitMouseLocation();
 
     console.log(players.length);

@@ -1,8 +1,12 @@
 $(document).mousemove(function(event){
 
-   mouseLocation = {
-       x: event.pageX,
-       y: event.pageY
-   };
+
 
 });
+
+function getMouseLocation (){
+    mouseLocation = {
+        x: game.input.mousePointer.x,
+        y: game.input.mousePointer.y
+    };
+}
