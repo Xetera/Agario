@@ -30,7 +30,6 @@ Entity.prototype.update = function(){
 };
 
 Entity.prototype.move = function(mouse){
-    console.log(mouse);
     let playerLocation = new Victor(this.x, this.y);
     let mouseLocation = new Victor(mouse.x, mouse.y);
     let delta  = mouseLocation.subtract(playerLocation);
@@ -49,6 +48,13 @@ Entity.prototype.move = function(mouse){
     //this.speedX = Math.cos(vec.x);
     //this.speedY = Math.sin(vec.y);
 
+};
+
+Entity.prototype.eatFood = function(food){
+    this.radius += food.boost;
+    // for now these two things are the same
+    this.score += food.boost;
+    foods.splice(foods.indexOf(food), 1);
 };
 
 module.exports = Entity;

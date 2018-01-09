@@ -68,7 +68,8 @@ Array.prototype.randChoice = function(){
 exports.checkCollision = function(a, b){
     // yes, this is actually magic
     // stolen from .NET rect collision detection
-    let distance = Math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2);
+    let distance = Math.sqrt((a.y - b.y)**2 + (a.x - b.x)**2);
+    console.log(distance);
     return a.radius + b.radius > distance
 
 };

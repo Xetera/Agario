@@ -1,10 +1,11 @@
 function initEvents(){
-    socket.on('playerConnect', packet =>{
-        //handler.playerConnect(packet);
+
+    socket.on('playerUpdate', pack => {
+        handler.playerUpdate(pack);
     });
 
-    socket.on('playerUpdate', packet => {
-        handler.playerUpdate(packet);
-    });
+    socket.on('foodUpdate', pack => {
+        handler.foodUpdate(pack);
+    })
 
 }

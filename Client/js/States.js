@@ -6,7 +6,8 @@ State.Boot= function(game){
 
 State.Boot.prototype = {
     preload: function(){
-        console.log("hjell");
+        this.load.image('food', '../Media/alliance.png');
+
         this.load.image('priest', '../Media/priest.png');
         this.load.image('mage', '../Media/mage.png');
         this.load.onLoadComplete.add(function(){

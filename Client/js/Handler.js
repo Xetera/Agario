@@ -21,9 +21,15 @@ handler.playerUpdate = function(pack){
             match.y = pack[i].y - pack[i].radius;
             match.height = pack[i].radius * 2;
             match.width  = pack[i].radius * 2;
+            if (pack[i].colliding){
+                match.tint = 0.3 * 0xffffff;
+            }
+            else{
+                match.tint = 0xffffff;
+            }
         }
         else{
-            drawPlayer(pack[i]);
+            graphics.drawPlayer(pack[i]);
         }
     }
 
@@ -36,6 +42,29 @@ handler.playerUpdate = function(pack){
                 game.world.scale.y * (players[i].y + 949/2 - (949 - players[i].radius))
                 */
             );
+        }
+    }
+
+};
+
+handler.foodUpdate = function(pack){
+    for (let i in pack){
+        const match = foods.find(food => food.id === pack[i].id);
+
+        if (match){
+            match.x = pack[i].x - pack[i].radius;
+            match.y = pack[i].y - pack[i].radius;
+            match.height = pack[i].radius * 2;
+            match.width  = pack[i].radius * 2;
+            if (pack[i].colliding){
+                match.tint = 0.3 * 0xffffff;
+            }
+            else{
+                match.tint = 0xffffff;
+            }
+        }
+        else{
+            graphics.drawFood(pack[i]);
         }
     }
 

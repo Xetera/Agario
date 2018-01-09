@@ -22,9 +22,9 @@ const handler = require('./Handler');
 const Player = require ('./Player');
 const util = require('./Utility');
 const config = require('../config');
+const populate = require('./Populate');
 
 /*
-const populate = require('./Populate');
 const upg = require('./Upgrades');
 const timer = require('./Countdown');
 */
@@ -106,11 +106,12 @@ io.sockets.on('connection', function(socket){
 
 
 setInterval(function(){
+    populate.summonFood(25);
     for (let i in players){
         players[i].update();
     }
+    handler.emitAll('foodUpdate', foods);
 
     handler.emitAll('playerUpdate', players);
-    handler.emitAll('foodsUpdate', foods);
     //console.log(players);
 }, 1000/60);

@@ -3,6 +3,7 @@
 let graphics;
 let players = [];
 let mouseLocation = {};
+let foods = [];
 
 State.Main = function(game){
 
