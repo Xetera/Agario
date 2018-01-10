@@ -1,20 +1,34 @@
 const config = require('../config');
 const Victor = require('victor');
 const util = require('./Utility');
+const handler = require('./Handler');
+
 function Entity(x, y, radius){
     // x and y values are the midpoint of the player
-    this.x = x + radius/2;
-    this.y = y + radius/2;
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.midpoint = [
+        this.x + this.radius/2,
+        this.y + this.radius/2
+    ];
+
     this.speedX = 0;
     this.speedY = 0;
     this.maxSpeed = 300;
-    this.radius = radius;
+    this.maxRadius = 200;
+
     this.id = util.generateRandomID();
 }
+Entity.prototype.updateMidpoint = function(){
+    this.midpoint = [this.x + (this.radius), this.y + (this.radius)];
+};
 
 Entity.prototype.update = function(){
     this.x += this.speedX;
     this.y += this.speedY;
+    this.updateMidpoint();
+
     if (this.x + this.radius >= config.windowX ){
         this.x = config.windowX - this.radius;
     }
@@ -29,32 +43,45 @@ Entity.prototype.update = function(){
     }
 };
 
+
+
 Entity.prototype.move = function(mouse){
-    let playerLocation = new Victor(this.x, this.y);
+    let playerLocation = new Victor(this.midpoint[0], this.midpoint[1]);
     let mouseLocation = new Victor(mouse.x, mouse.y);
     let delta  = mouseLocation.subtract(playerLocation);
 
     // prevents jittering
-
     if ((Math.abs(delta.x) - 1 < 1) && (Math.abs(delta.y) -1 < 1)){
         this.speedX = 0;
         this.speedY = 0;
         return
     }
-    let magnitude = delta.length() < this.maxSpeed ? (delta.length() * 60)/1000 : (this.maxSpeed * 60)/ 1000;
+
+    let magnitude =
+        delta.length() < this.maxSpeed ?
+        (delta.length() * 60)/1000:
+        (this.maxSpeed * 60)/ 1000;
+
     let theta = Math.atan2(delta.y, delta.x);
     this.speedX = Math.cos(theta) * magnitude;
     this.speedY = Math.sin(theta) * magnitude;
-    //this.speedX = Math.cos(vec.x);
-    //this.speedY = Math.sin(vec.y);
-
 };
 
+
+// eating will be separated into 2 different functions
 Entity.prototype.eatFood = function(food){
-    this.radius += food.boost;
-    // for now these two things are the same
+    if (!(this.radius + food.boost > this.maxRadius)) {
+        this.radius += food.boost;
+    }
+    // for now these two things are the same thing but we
+    // might want to separate them later
     this.score += food.boost;
-    foods.splice(foods.indexOf(food), 1);
+    let index = foods.findIndex(find => {return find.id === food.id});
+    foods.splice(index, 1);
+
+
+
+    handler.emitAll('removeFood', food);
 };
 
 module.exports = Entity;

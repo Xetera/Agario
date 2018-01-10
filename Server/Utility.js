@@ -66,12 +66,18 @@ Array.prototype.randChoice = function(){
 
 
 exports.checkCollision = function(a, b){
-    // yes, this is actually magic
-    // stolen from .NET rect collision detection
-    let distance = Math.sqrt((a.y - b.y)**2 + (a.x - b.x)**2);
-    console.log(distance);
-    return a.radius + b.radius > distance
 
+    let distance = Math.sqrt((a.y - b.y)**2 + (a.x - b.x)**2);
+    return a.radius + b.radius > distance
+};
+
+
+// the winner is returned
+// this only runs if the two guys are already colliding
+exports.checkCollisionOutcome = function(a, b){
+    if (a.size * 0.8 > b.size){
+
+    }
 };
 
 
@@ -127,7 +133,14 @@ exports.secondsToTickRate = function(seconds){
 exports.minutesToTickRate = function(minutes){
     return (60 * minutes) * (1000/config.FPS);
 };
-
+/**
+ *
+ * @param {number} x1
+ * @param {number} x2
+ * @param {number} y1
+ * @param {number} y2
+ * @returns {number}
+ */
 exports.calculateDistance = function(x1, x2, y1, y2){
     return Math.sqrt((x1 - x2)**2 + (y1 - y2)**2);
 };

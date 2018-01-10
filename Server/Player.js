@@ -23,7 +23,7 @@ Player.prototype.update = function(){
     for (let i in foods){
         let coll = util.checkCollision(this, foods[i]);
         if (coll){
-
+            this.eatFood(foods[i]);
         }
     }
 };

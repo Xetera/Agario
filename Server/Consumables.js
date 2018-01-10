@@ -34,6 +34,5 @@ Food.prototype.constructor = Food;
 
 
 module.exports = {
-    Pickup: Pickup,
     Food: Food
 };

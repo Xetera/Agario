@@ -1,5 +1,5 @@
-exports.windowX = 4000;
-exports.windowY = 4000;
+exports.windowX = 1920;
+exports.windowY = 949;
 
 exports.classes = [
     'mage', 'priest'

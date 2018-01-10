@@ -4,8 +4,13 @@ function initEvents(){
         handler.playerUpdate(pack);
     });
 
-    socket.on('foodUpdate', pack => {
-        handler.foodUpdate(pack);
+    socket.on('addFood', pack => {
+        console.log('addingFOO(OOOD');
+        handler.addFood(pack);
+    });
+
+    socket.on('removeFood', food => {
+        handler.removeFood(food);
     })
 
 }

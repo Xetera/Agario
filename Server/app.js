@@ -81,16 +81,8 @@ global.SOCKET_LIST = {};
 global.foods = [];
 
 io.sockets.on('connection', function(socket){
-    SOCKET_LIST[socket.id] = socket;
+    handler.newConnection(socket);
 
-    players[socket.id] = new Player(1920/2, 949/2, 100, config.classes.randChoice());
-    players[socket.id]['id'] = socket.id;
-
-    socket.on('ready', ()=>{
-        console.log("someone connected");
-
-        handler.emitAll('playerConnect', players[socket.id]);
-    });
 
 
     socket.on('mouseMove', pack => {
@@ -106,11 +98,12 @@ io.sockets.on('connection', function(socket){
 
 
 setInterval(function(){
+    if (Object.keys(SOCKET_LIST).length < 1) return;
     populate.summonFood(25);
     for (let i in players){
         players[i].update();
     }
-    handler.emitAll('foodUpdate', foods);
+
 
     handler.emitAll('playerUpdate', players);
     //console.log(players);
