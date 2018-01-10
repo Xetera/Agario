@@ -66,6 +66,8 @@ Entity.prototype.move = function(pack){
         delta.length() < this.maxSpeed ?
         (delta.length() * 60)/1000:
         (this.maxSpeed * 60)/ 1000;
+
+
     //
     //              mouse
     //              / |
@@ -76,8 +78,9 @@ Entity.prototype.move = function(pack){
     // this-----------.
     //
     let theta = Math.atan2(delta.y, delta.x);
-    this.speedX = Math.cos(theta) * magnitude;
-    this.speedY = Math.sin(theta) * magnitude;
+    this.speedX = (Math.cos(theta)).toFixed(1) * magnitude.toFixed(1);
+    this.speedY = (Math.sin(theta)).toFixed(1) * magnitude.toFixed(1);
+
 };
 
 

@@ -15,8 +15,6 @@ Player.prototype.constructor = Player;
 
 Player.prototype.update = function(){
     Entity.prototype.update.call(this);
-    console.log(this.x);
-    console.log(this.y);
     for (let i in players){
         // making sure we don't check ourselves
         if (players[i].id === this.id) continue;
