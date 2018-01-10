@@ -8,6 +8,16 @@ handler.playerConnect = function(pack){
     drawPlayer(pack);
 };
 
+handler.playerDisconnect = function(player){
+    let index = players.findIndex(elem => {
+        return elem.id === player.id;
+    });
+    players[index].destroy();
+    players.splice(index, 1);
+
+};
+
+
 handler.playerUpdate = function(pack){
     getMouseLocation();
     handler.emitMouseLocation();
@@ -16,8 +26,8 @@ handler.playerUpdate = function(pack){
         const match = players.find(player => player.id === pack[i].id);
 
         if (match){
-            match.x = pack[i].x;
-            match.y = pack[i].y;
+            match.x = pack[i].x - pack[i].radius;
+            match.y = pack[i].y - pack[i].radius;
             match.height = pack[i].radius * 2;
             match.width  = pack[i].radius * 2;
             if (pack[i].colliding){

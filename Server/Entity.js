@@ -46,7 +46,7 @@ Entity.prototype.update = function(){
 
 
 Entity.prototype.move = function(mouse){
-    let playerLocation = new Victor(this.midpoint[0], this.midpoint[1]);
+    let playerLocation = new Victor(this.x, this.y);
     let mouseLocation = new Victor(mouse.x, mouse.y);
     let delta  = mouseLocation.subtract(playerLocation);
 
@@ -57,11 +57,18 @@ Entity.prototype.move = function(mouse){
         return
     }
 
+    // controlling for the tick rate and maxSpeed
     let magnitude =
         delta.length() < this.maxSpeed ?
         (delta.length() * 60)/1000:
         (this.maxSpeed * 60)/ 1000;
-
+    //            .
+    //          / |
+    //        /   |
+    //      /     |
+    //    /      -|
+    //  /       | |
+    //.-----------.
     let theta = Math.atan2(delta.y, delta.x);
     this.speedX = Math.cos(theta) * magnitude;
     this.speedY = Math.sin(theta) * magnitude;

@@ -11,6 +11,10 @@ function initEvents(){
 
     socket.on('removeFood', food => {
         handler.removeFood(food);
-    })
+    });
+
+    socket.on('playerDisconnect', player=>{
+       handler.playerDisconnect(player);
+    });
 
 }

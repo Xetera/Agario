@@ -91,6 +91,8 @@ io.sockets.on('connection', function(socket){
 
     socket.on('disconnect', ()=>{
         delete SOCKET_LIST[socket.id];
+
+        handler.emitAll('playerDisconnect', players[socket.id]);
         delete players[socket.id];
     });
 });
