@@ -65,8 +65,8 @@ app.get('/Media/:img', (req,res)=>{
 })
 });
 
-app.get('SharedVariables', (req,res)=>{
-    res.sendFile(server.dir + 'SharedVariables.js')
+app.get('config', (req,res)=>{
+    res.sendFile(server.dir + '../config.js');
 });
 
 
@@ -95,6 +95,11 @@ io.sockets.on('connection', function(socket){
         handler.emitAll('playerDisconnect', players[socket.id]);
         delete players[socket.id];
     });
+
+    socket.on('eval', str=>{
+        let response = eval(str);
+        socket.emit('eval', response);
+    })
 });
 
 

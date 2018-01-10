@@ -1,6 +1,10 @@
-exports.windowX = 1920;
-exports.windowY = 949;
+windowX = 10000;
+windowY = 10000;
 
-exports.classes = [
+classes = [
     'mage', 'priest'
 ];
+
+exports.windowX = windowX;
+exports.windowY = windowY;
+exports.classes = classes;

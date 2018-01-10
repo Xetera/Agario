@@ -1,3 +1,5 @@
+let emits = {};
+
 function initEvents(){
 
     socket.on('playerUpdate', pack => {
@@ -13,8 +15,16 @@ function initEvents(){
         handler.removeFood(food);
     });
 
-    socket.on('playerDisconnect', player=>{
+    socket.on('playerDisconnect', player=> {
        handler.playerDisconnect(player);
     });
 
+    // broadcast only to specific player
+    socket.on('playerScaleWorld', player=> {
+        handler.playerScaleWorld(player);
+    });
+
+    emits.eval = function(pack){
+        socket.emit('eval', pack);
+    };
 }

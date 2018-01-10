@@ -1,6 +1,6 @@
 graphics = {};
 graphics.drawPlayer = function(pack){
-    let player = game.add.sprite(pack.x, pack.y, pack.class);
+    let player = game.add.sprite(pack.x - pack.radius, pack.y - pack.radius, pack.class);
     player.width  = pack.radius * 2;
     player.height = pack.radius * 2;
     player.id = pack.id;

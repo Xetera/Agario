@@ -26,10 +26,11 @@ handler.playerUpdate = function(pack){
         const match = players.find(player => player.id === pack[i].id);
 
         if (match){
-            match.x = pack[i].x - pack[i].radius;
-            match.y = pack[i].y - pack[i].radius;
+            match.x = pack[i].x;
+            match.y = pack[i].y;
             match.height = pack[i].radius * 2;
             match.width  = pack[i].radius * 2;
+            match.radius = pack[i].radius;
             if (pack[i].colliding){
                 match.tint = 0.3 * 0xffffff;
             }
@@ -45,13 +46,14 @@ handler.playerUpdate = function(pack){
     for (let i in players){
         if (players[i].id === socket.id){
 
-            game.camera.focusOnXY( 2300, 300
+            game.camera.focusOnXY(
 
-                //game.world.scale.x * (players[i].x + 1920/2 - (1920 - players[i].radius)),
-                //game.world.scale.y * (players[i].y + 949/2 - (949 - players[i].radius))
+                game.world.scale.x * (players[i].x + players[i].radius),
+                game.world.scale.y * (players[i].y + players[i].radius)
 
             );
-
+            game.debug.cameraInfo(game.camera, 32, 32);
+            game.debug.spriteCoords(players[i], 32, 650-32);
         }
     }
 
@@ -81,4 +83,8 @@ handler.removeFood = function(food){
     foods[index].destroy();
 
     foods.splice(index, 1);
+};
+
+handler.playerScaleWorld = function(amount){
+    game.world.scale.setTo(amount);
 };

@@ -67,17 +67,16 @@ Array.prototype.randChoice = function(){
 
 exports.checkCollision = function(a, b){
 
-    let distance = Math.sqrt((a.y - b.y)**2 + (a.x - b.x)**2);
+    let distance = Math.sqrt((a.midpoint[1] - b.midpoint[1])**2 + (a.midpoint[0] - b.midpoint[0])**2);
     return a.radius + b.radius > distance
+
 };
 
 
-// the winner is returned
-// this only runs if the two guys are already colliding
-exports.checkCollisionOutcome = function(a, b){
-    if (a.size * 0.8 > b.size){
 
-    }
+exports.checkCollisionOutcome = function(a, b){
+    if (a.radius)
+    return a.radius * 0.8 > b.radius;
 };
 
 

@@ -15,7 +15,7 @@
     <script src="js/Utility.js"></script>
     <script>
         State = {};
-        game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, "", {
+        game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, "", {
             preload: preload,
             create: create
         });
