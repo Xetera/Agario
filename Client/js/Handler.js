@@ -53,7 +53,7 @@ handler.playerUpdate = function(pack){
 
             );
             game.debug.cameraInfo(game.camera, 32, 32);
-            game.debug.spriteCoords(players[i], 32, 650-32);
+            game.debug.spriteCoords(players[i], 32, 900-32);
         }
     }
 

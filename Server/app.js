@@ -86,6 +86,9 @@ io.sockets.on('connection', function(socket){
 
 
     socket.on('mouseMove', pack => {
+        // for some reason the disconnected players keep
+        // sending packets and it breaks the server
+        if (!players[socket.id]) return;
         players[socket.id].move(pack);
     });
 

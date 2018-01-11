@@ -6,18 +6,36 @@ let mouseLocation = {};
 let foods = [];
 
 let scaler;
-let background;
+let backgroundArray = [];
+let grid;
+
 State.Main = function(game){};
 
 State.Main.prototype = {
-    preload: function(){
+    preload: function () {
+        this.stage.backgroundColor = '#0072bc';
+
     },
-    create: function(){
-        background = this.add.group();
-        this.add.tileSprite(0, 0, 10000, 10000, 'background');
+    create: function () {
         socket = io();
+        //let bg = game.add.sprite(0, 0, 'background');
+        //let bg2 = game.add.sprite(0, game.cache.getImage('background').height * 2, 'background');
+        //bg.scale.setTo(2, 2);
+        //bg2.scale.setTo(2, 2);
+        //test()
+        let height = game.cache.getImage('background').height;
+        let width = game.cache.getImage('background').width;
+        /*
+        for (let i=0; i < game.world.height; i + height){
+            for (let j=0; j < game.world.width; j + width){
+                this.add.sprite(j * width, i * height, 'background');
+            }
+        }
+        */
+        let background = game.add.tileSprite(0, 0, width * game.width, height * game.height, 'background');
+
     }
-};
+}
 
 
 $(function (){
@@ -28,15 +46,12 @@ $(function (){
 $(window).resize(function(){
     handleResize();
 });
-
-function drawBackground(){
-    for (let column = 0; column < map.columns; column++) {
-        for (let row = 0; row < map.rows; row++) {
-            let tile = map.getTile(column, row);
-            let x = column * map.tileSize;
-            let y = row * map.tileSize;
-            drawTile(tile, x, y);
-        }
+function test(){
+    let width  = game.cache.getImage('background').width;
+    for (let i=0; i < 2; i++){
+        game.add.sprite(width * 2, 0, 'background')
     }
+}
+function createBackground(){
 
 }
